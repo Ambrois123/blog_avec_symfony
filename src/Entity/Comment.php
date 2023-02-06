@@ -21,8 +21,10 @@ class Comment
     private ?\DateTimeImmutable $PublishedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    private ?Post $no = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Post $post = null;
 
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -52,15 +54,17 @@ class Comment
         return $this;
     }
 
-    public function getNo(): ?Post
+    public function getPost(): ?Post
     {
-        return $this->no;
+        return $this->post;
     }
 
-    public function setNo(?Post $no): self
+    public function setPost(?Post $post): self
     {
-        $this->no = $no;
+        $this->post = $post;
 
         return $this;
     }
+
+    
 }
