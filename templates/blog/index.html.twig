@@ -4,10 +4,18 @@
 
 {% block body %}
 
-    {% publication in publications %}
+    {% for publication in publications %}
         <h4>{{ publication.title }}</h4>
         <p>
             <a href="/publication/{{ publication.id }}">Plus de détails</a>
         </p>
     {% endfor %}
+
+    {% if previous >= 0 %}
+        <a href="{{ path('/', { id: post.id, offset: previous }) }}">Previous</a>
+    {% endif %}
+    {% if next < comments|length %}
+        <a href="{{ path('/', { id: post.id, offset: next }) }}">Next</a>
+    {% endif %}
+
 {% endblock %}

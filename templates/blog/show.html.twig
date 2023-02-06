@@ -21,5 +21,13 @@
         <div>Il n'y a pas de commentaire pour cette publication</div>
     {% endif %}
 
+    {% if previous >= 0 %}
+        <a href="{{ path('publication', {id: publication.id, offset: previous}) }}">Previous</a>
+    {% endif %}
+
+    {% if next < comments|length %}
+        <a href="{{ path('publication', {id:publication.id, offset: next}) }}">Next</a>
+    {% endif %}
+
 
 {% endblock %}

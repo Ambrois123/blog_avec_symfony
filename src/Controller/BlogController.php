@@ -17,12 +17,17 @@ class BlogController extends AbstractController
 
     
 
-    public function index(int $page, PostRepository $posts): Response
+    public function index(Request $request, Post $post, int $page, PostRepository $posts): Response
     {
         $latestPosts = $posts->findAll();
         
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $posts->getPostPaginator($post, $offset);
+
         return $this->render('blog/index.html.twig', [
             'publications' => $latestPosts,
+            'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
         ]);
     }
 
