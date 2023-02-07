@@ -11,11 +11,5 @@
         </p>
     {% endfor %}
 
-    {% if previous >= 0 %}
-        <a href="{{ path('/', { id: post.id, offset: previous }) }}">Previous</a>
-    {% endif %}
-    {% if next < comments|length %}
-        <a href="{{ path('/', { id: post.id, offset: next }) }}">Next</a>
-    {% endif %}
 
 {% endblock %}
