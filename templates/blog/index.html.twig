@@ -11,5 +11,12 @@
         </p>
     {% endfor %}
 
+    {% if previous >= 0 %}
+        <a href="{{ path('app_blog', { offset: previous }) }}">Previous</a>
+        {% endif %}
+        {% if next < publications|length %}
+        <a href="{{ path('app_blog', { offset: next }) }}">Next</a>
+        {% endif %}
+
 
 {% endblock %}

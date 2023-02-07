@@ -21,6 +21,11 @@
         <div>Il n'y a pas de commentaire pour cette publication</div>
     {% endif %}
 
+    <h2>Ajouter un commentaire</h2>
+
+    {{ form(comment_form) }}
+
+
     {% if previous >= 0 %}
         <a href="{{ path('publication', {id: publication.id, offset: previous}) }}">Previous</a>
     {% endif %}

@@ -6,7 +6,9 @@ use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+
 
 /**
  * @extends ServiceEntityRepository<Comment>
@@ -18,6 +20,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class CommentRepository extends ServiceEntityRepository
 {
+
+    
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
@@ -31,6 +35,8 @@ class CommentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+
 
     public function remove(Comment $entity, bool $flush = false): void
     {
@@ -56,6 +62,8 @@ class CommentRepository extends ServiceEntityRepository
         return new Paginator($query);
         
     }
+
+   
 
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
