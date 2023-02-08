@@ -11,6 +11,7 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Tags;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use App\Entity\User;
 
 
 class DashboardController extends AbstractDashboardController
@@ -56,5 +57,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Publications', 'fas fa-newspaper', Post::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comment::class);
         yield MenuItem::linkToCrud('Tags', 'fas fa-tags', Tags::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
     }
 }
