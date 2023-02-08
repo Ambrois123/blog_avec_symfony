@@ -39,11 +39,16 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\OneToMany(mappedBy: 'no', targetEntity: User::class)]
+    private Collection $auteur;
+
     public function __construct()
     {
        
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->auteur = new ArrayCollection();
+        $this->PublishedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -166,6 +171,36 @@ class Post
             // set the owning side to null (unless already changed)
             if ($comment->getPost() === $this) {
                 $comment->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getAuteur(): Collection
+    {
+        return $this->auteur;
+    }
+
+    public function addAuteur(User $auteur): self
+    {
+        if (!$this->auteur->contains($auteur)) {
+            $this->auteur->add($auteur);
+            $auteur->setNo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuteur(User $auteur): self
+    {
+        if ($this->auteur->removeElement($auteur)) {
+            // set the owning side to null (unless already changed)
+            if ($auteur->getNo() === $this) {
+                $auteur->setNo(null);
             }
         }
 
