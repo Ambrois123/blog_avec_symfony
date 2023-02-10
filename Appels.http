@@ -1,9 +1,19 @@
 ###
 GET http://127.0.0.1:8000/api/posts
 
-###
-POST http://127.0.0.1:8000/api/posts/1
 
+###
+GET http://127.0.0.1:8000/api/posts/1
+
+###
+POST http://127.0.0.1:8000/api/login_check HTTP/1.1
+Content-Type: application/json
+Authorization: 
+
+{
+    "username": "admin",
+    "password": "Azerty77"
+}
 
 
 ###

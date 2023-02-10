@@ -6,10 +6,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class SecurityController extends AbstractController
 {
+    #[Route(path: '/api/login_check', name: 'api_login_check')]    
+    public function api_login(): JsonResponse
+    {
+        $user = $this->getUser();
+        return new JsonResponse([
+        "userIdentifier" => $user->getUserIdentifier(),
+        'roles' => $user->getRoles(),
+        ]);
+    }
+
+    #[Route(path: '/api/login', name: 'api_login', methods: ["POST"])]
+    public function login_api() : Response {
+        $user = $this->getUser();
+        return $this->json([
+        "userIdentifier" => $user->getUserIdentifier(),
+        "roles" => $user->getRoles()
+        ]);
+    }
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -30,4 +50,6 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
 }
